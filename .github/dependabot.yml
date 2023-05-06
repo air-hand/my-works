@@ -1,0 +1,8 @@
+# update version of dependencies on chrome-extensions
+version: 2
+updates:
+  # update npm dependencies on chrome-extensions/open-slideshare-in-iframe
+  - package-ecosystem: "npm"
+    directory: "/ws/chrome-extensions/open-slideshare-in-iframe"
+    schedule:
+      interval: "weekly"
