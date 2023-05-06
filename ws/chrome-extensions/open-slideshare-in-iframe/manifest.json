@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "Open slideshare as embed.",
+    "version": "1.0",
+    "description": "",
+    "background": {
+        "service_worker": "src/background.ts",
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://www.slideshare.net/*"],
+            "js": ["src/content.ts"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["assets/*.html"],
+            "matches": ["*://www.slideshare.net/*"]
+        }
+    ],
+    "permissions": ["activeTab", "tabs", "background", "scripting"]
+}

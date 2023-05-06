@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "es6",
+    "outDir": "dist",
+    "typeRoots": [
+        "node_modules/@types",
+    ],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": ["dist", "node_modules", "tests"]
+}

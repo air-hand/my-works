@@ -1,0 +1,25 @@
+{
+    "name": "Dev Env for Chrome Extensions",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work/ws/chrome-extensions",
+    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh && make -B",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dbaenumer.vscode-eslint",
+                "editorconfig.editorconfig",
+                "eamodio.gitlens",
+                "bierner.markdown-mermaid",
+                "github.copilot",
+            ],
+            "settings": {
+                "editor.suggest.preview": true,
+                "aws.telemetry": false,
+            }
+        }
+    },
+    "features": {
+    },
+    "shutdownAction": "stopCompose"
+}

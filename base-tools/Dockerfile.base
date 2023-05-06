@@ -1,0 +1,60 @@
+# syntax=docker/dockerfile:1
+FROM debian:bullseye
+
+ENV \
+    DEBIAN_FRONTEND=noninteractive \
+    LANG=en_US.UTF-8 \
+    TZ=Asia/Tokyo
+
+ARG USERNAME
+ARG UID
+ARG GID
+ARG HOMEDIR
+ARG DOCKER_GID
+
+RUN sed -ie 's!http://deb.debian.org/debian !http://ftp.jaist.ac.jp/debian !' /etc/apt/sources.list
+
+RUN apt update && apt install -y \
+    apt-file \
+    make bash-completion tree jq vim git tig build-essential curl tar gzip unzip sudo tzdata man-db \
+    automake autoconf libtool \
+    locales-all \
+    procps \
+    graphviz \
+    docker.io \
+    python3-minimal \
+    python3-pip \
+    && apt-file update \
+    ;
+
+RUN groupadd --gid $GID $USERNAME \
+    && useradd --uid $UID -d ${HOMEDIR} -m --gid $GID $USERNAME \
+    && echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USERNAME} \
+    && chmod 0440 /etc/sudoers.d/$USERNAME \
+    && mkdir -p ${HOMEDIR}/.config \
+    && chown -R $USERNAME:$USERNAME ${HOMEDIR} \
+    ;
+
+# for control docker with DooD.
+# add group docker if not exists, and add user to group docker.
+RUN groupadd --gid $DOCKER_GID docker-user || true \
+    && usermod -aG $(getent group $DOCKER_GID | cut -d: -f1) $USERNAME \
+    ;
+
+RUN python3 -m pip install -U pre-commit
+
+# https://github.com/inotify-tools/inotify-tools
+ENV INOTIFY_TOOLS_VER=3.22.6.0
+RUN mkdir -p /usr/local/src && cd /usr/local/src \
+    && curl -o inotify-tools.tar.gz -sL "https://github.com/inotify-tools/inotify-tools/archive/refs/tags/${INOTIFY_TOOLS_VER}.tar.gz" \
+    && tar -zxvf inotify-tools.tar.gz \
+    && cd inotify-tools-${INOTIFY_TOOLS_VER} \
+    && ./autogen.sh && ./configure --prefix=/usr && make && make install \
+    ;
+
+# https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+ENV PROMPT_COMMAND='history -a' \
+    HISTFILE=/commandhistory/.bash_history
+RUN mkdir -p /commandhistory && chown -R $USERNAME:$USERNAME /commandhistory
+
+USER $USERNAME
