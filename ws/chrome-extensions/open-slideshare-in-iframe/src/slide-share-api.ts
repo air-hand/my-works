@@ -10,6 +10,7 @@ export namespace SlideShare {
         callback? : string;
     }
 
+    // eslint-disable-next-line no-inner-declarations
     function attachOEmbedRequestParameters2URL(url: URL, params: OEmbedRequestParameters): URL {
         url.searchParams.append("url", params.url.toString());
         if (params.maxwidth) {
@@ -35,8 +36,6 @@ export namespace SlideShare {
     }
 
     export class API {
-        constructor() {}
-
         // https://www.slideshare.net/developers/oembed
         async oembed(page_url: URL) : Promise<OEmbedResponse> {
             const OEMBED_API_URL = "https://www.slideshare.net/api/oembed/2";
@@ -46,13 +45,11 @@ export namespace SlideShare {
                 format: "json"
             });
 
-            console.log(request_url.toString());
             const response = await fetch(request_url.toString());
             if (!response.ok) {
                 throw new Error("HTTP error, status = " + response.status);
             }
             const json = await response.json();
-            console.log(json);
             return json as OEmbedResponse;
         }
     }

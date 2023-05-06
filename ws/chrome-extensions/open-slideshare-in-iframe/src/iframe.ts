@@ -1,6 +1,6 @@
 import { SlideShare } from "./slide-share-api";
 
-declare var document: Document;
+declare let document: Document;
 
 document.addEventListener('DOMContentLoaded', async() => {
     const url = new URL(window.location.href);

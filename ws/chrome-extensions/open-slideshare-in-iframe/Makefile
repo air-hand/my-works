@@ -14,9 +14,13 @@ watch:
 	npx tsc --noEmit --watch
 
 .PHONY: build
-build: clean test
+build: clean test lint
 	npx tsc --noEmit && npx parcel build manifest.json --no-source-maps
 
 .PHONY: test
 test:
 	npx jest
+
+.PHONY: lint
+lint:
+	npx eslint .

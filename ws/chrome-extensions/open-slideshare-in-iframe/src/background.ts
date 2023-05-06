@@ -1,6 +1,11 @@
 import { urlWithoutQueryStrings } from "./utils";
 
-chrome.runtime.onMessage.addListener(async(message: any, sender: chrome.runtime.MessageSender, sendResponse: Function) => {
+type Message = {
+    type: string,
+    url?: URL|string,
+};
+
+chrome.runtime.onMessage.addListener(async(message: Message, sender: chrome.runtime.MessageSender, sendResponse: CallableFunction) => {
     if (message.type === "open-slideshare") {
         const url = urlWithoutQueryStrings(message.url);
         await chrome.tabs.create({
