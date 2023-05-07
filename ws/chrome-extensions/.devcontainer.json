@@ -3,7 +3,7 @@
     "dockerComposeFile": "./docker-compose.yml",
     "service": "dev",
     "workspaceFolder": "/work/ws/chrome-extensions",
-    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh && make -B",
+    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh && make -B Dockerfile",
     "customizations": {
         "vscode": {
             "extensions": [
