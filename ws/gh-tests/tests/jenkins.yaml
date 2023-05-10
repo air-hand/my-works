@@ -1,0 +1,59 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - string:
+          id: secret_text
+          secret: ${SECRET_TEXT}
+          scope: GLOBAL
+jenkins:
+  globalNodeProperties:
+  - envVars:
+      env:
+      - key: VARIABLE1
+        value: foo
+      - key: VARIABLE2
+        value: bar
+groovy:
+  - script: >
+      println("This is Groovy script!");
+jobs:
+  - script: |
+      pipelineJob('job-dsl-plugin') {
+        definition {
+          cpsScm {
+            scm {
+              git {
+                remote {
+                  url('https://github.com/jenkinsci/job-dsl-plugin.git')
+                }
+                branch('*/master')
+              }
+            }
+            lightweight()
+          }
+        }
+      }
+  - script: |
+      pipelineJob('job-dsl-plugin-script') {
+        definition {
+          cps {
+            script('''\
+              pipeline {
+                  agent any
+                  environment {
+                      SECRET_TEXT = credentials('secret_text')
+                  }
+                  stages {
+                      stage('secrets') {
+                          steps {
+                              echo env.SECRET_TEXT
+                          }
+                      }
+                  }
+              }
+              '''.stripIndent())
+            sandbox()
+          }
+        }
+      }
