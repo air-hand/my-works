@@ -27,8 +27,8 @@ RUN apt update && apt install -y \
     && apt-file update \
     ;
 
-RUN groupadd --gid $GID $USERNAME \
-    && useradd --uid $UID -d ${HOMEDIR} -m --gid $GID $USERNAME \
+RUN groupadd --gid $GID $USERNAME || true \
+    && useradd --uid $UID -d ${HOMEDIR} -m --gid $GID $USERNAME || true\
     && echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USERNAME} \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     && mkdir -p ${HOMEDIR}/.config \
