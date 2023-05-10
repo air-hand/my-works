@@ -11,3 +11,7 @@ https://w2w2.hatenablog.com/entry/2022/03/30/033018
 ## How to build
 
 make
+
+## MEMO
+
+追加設定は必要だが、Adblockで問題なく広告を無視できていたため、こちらは不要となった。
