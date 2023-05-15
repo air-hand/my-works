@@ -11,6 +11,9 @@
             "path": "./ws/chrome-extensions"
         },
         {
+            "path": "./ws/stable-diffusion-webui"
+        },
+        {
             "path": "./ws/try-bake"
         },
     ],

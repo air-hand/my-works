@@ -1,0 +1,25 @@
+{
+    "name": "Dev Env",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work/ws/stable-diffusion-webui",
+    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh && make -B Dockerfile",
+    "postStartCommand": "bash -x ./startup.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "editorconfig.editorconfig",
+                "eamodio.gitlens",
+                "bierner.markdown-mermaid",
+                "github.copilot",
+            ],
+            "settings": {
+                "editor.suggest.preview": true,
+                "aws.telemetry": false,
+            }
+        }
+    },
+    "features": {
+    },
+    "shutdownAction": "stopCompose"
+}
