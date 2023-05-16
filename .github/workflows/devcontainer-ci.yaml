@@ -1,4 +1,3 @@
-# Run test when push changes on chrome-extensions/open-slideshare-in-iframe
 on:
   push:
 
@@ -12,16 +11,17 @@ jobs:
           "ws/chrome-extensions",
           "ws/security/easybuggy-codeql",
         ]
-    container:
-      image: mcr.microsoft.com/vscode/devcontainers/typescript-node:20
     defaults:
       run:
         working-directory: ${{ matrix.workdir }}
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: install devcontainer/cli
-        run: npm install -g @devcontainers/cli@^0.41.0
+        run: npm install -g @devcontainers/cli
 
       - name: build devcontainer
         run: devcontainer build --workspace-folder .
