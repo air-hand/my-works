@@ -1,0 +1,15 @@
+{
+    "folders": [
+        {
+            "path": ".",
+        },
+        {
+            "name": "repo-root",
+            "path": "../../../",
+        },
+    ],
+    "settings": {
+        "typescript.format.enable": true,
+        "typescript.preferences.importModuleSpecifier": "project-relative",
+    }
+}
