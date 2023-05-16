@@ -1,0 +1,27 @@
+# Run test when push changes on chrome-extensions/open-slideshare-in-iframe
+on:
+  push:
+
+jobs:
+  Build-And-Run:
+    runs-on: ubuntu-latest
+    strategy:
+      #fail-fast: true
+      matrix:
+        workdir: [
+          "ws/chrome-extensions/open-slideshare-in-iframe",
+          "ws/security/easybuggy-codeql",
+        ]
+    container:
+      image: mcr.microsoft.com/vscode/devcontainers/typescript-node:20
+    defaults:
+      run:
+        working-directory: ${{ matrix.workdir }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: install devcontainer/cli
+        run: npm install -g @devcontainers/cli
+
+      - name: build devcontainer
+        run: devcontainer build --workspace-folder .
