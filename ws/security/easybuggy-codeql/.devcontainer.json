@@ -12,7 +12,8 @@
                 "editorconfig.editorconfig",
                 "eamodio.gitlens",
                 "github.copilot",
-                "MS-vsliveshare.vsliveshare",
+                "ms-vsliveshare.vsliveshare",
+                "github.vscode-codeql",
             ],
             "settings": {
                 "editor.suggest.preview": true,
