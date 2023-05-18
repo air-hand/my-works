@@ -1,10 +1,14 @@
 MAKEFILE_DIR := $(dir $(abspath $(firstword $(MAKEFILE_LIST))))
-
-include ../../base-tools/dockerfile.mk
+IS_IN_CONTAINER := $(shell test -f /.dockerenv && echo 0 || echo 1)
+DOCKER_COMPOSE_RUN_CMD := docker compose run --rm --workdir /work/ws/stable-diffusion-webui --build dev 
 
 .PHONY: run
-run: Dockerfile
-	docker compose run --rm --workdir /work/ws/stable-diffusion-webui --build dev bash -x startup.sh
+run:
+	if [ $(IS_IN_CONTAINER) -eq 0 ]; then \
+		bash -x startup.sh; \
+	else \
+		$(DOCKER_COMPOSE_RUN_CMD) $(MAKE) $@; \
+	fi
 
 .PHONY: clean
 clean:
@@ -12,9 +16,8 @@ clean:
 
 .PHONY: test-nvidia-container
 test-nvidia-container:
-	docker compose run --rm --workdir /work/ws/stable-diffusion-webui dev nvidia-smi
-
-# https://zenn.dev/takeguchi/articles/361e12a5321095
-# FROM nvidia/cuda:11.7.0-base-ubuntu22.04
-# FROM nvidia/cuda:12.1.1-base-ubuntu22.04
-
+	if [ $(IS_IN_CONTAINER) -eq 0 ]; then \
+		nvidia-smi; \
+	else \
+		$(DOCKER_COMPOSE_RUN_CMD) $(MAKE) $@; \
+	fi

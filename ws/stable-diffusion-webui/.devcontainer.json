@@ -1,10 +1,10 @@
 {
-    "name": "Dev Env",
+    "name": "${localWorkspaceFolderBasename}",
     "dockerComposeFile": "./docker-compose.yml",
     "service": "dev",
-    "workspaceFolder": "/work/ws/stable-diffusion-webui",
-    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh && make -B Dockerfile",
-    "postStartCommand": "bash -x ./startup.sh",
+    "workspaceFolder": "/work/ws/${localWorkspaceFolderBasename}",
+    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh",
+//    "postStartCommand": "make run",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -15,7 +15,6 @@
             ],
             "settings": {
                 "editor.suggest.preview": true,
-                "aws.telemetry": false,
             }
         }
     },
