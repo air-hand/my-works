@@ -44,4 +44,4 @@ run: build
 
 .PHONY: devcontainer-test
 devcontainer-test:
-	devcontainer up --workspace-folder=./ --remove-existing-container --build-no-cache
+	devcontainer up --workspace-folder=./ --remove-existing-container

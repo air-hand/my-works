@@ -24,4 +24,4 @@ jobs:
         run: npm install -g @devcontainers/cli
 
       - name: build devcontainer
-        run: devcontainer up --workspace-folder=./ --remove-existing-container --build-no-cache
+        run: devcontainer up --workspace-folder=./ --remove-existing-container
