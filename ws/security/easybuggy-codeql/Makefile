@@ -41,3 +41,7 @@ run: build
 	@cd ./cloned/easybuggy4django \
 	&& docker run --rm -it --name easybuggy4django-container --env DJANGO_SETTINGS_MODULE=config.only_vulnerable_settings -p 8000:8000 easybuggy4django:latest \
 	python manage.py runserver 0.0.0.0:8000
+
+.PHONY: devcontainer-test
+devcontainer-test:
+	devcontainer up --workspace-folder=./ --remove-existing-container --build-no-cache
