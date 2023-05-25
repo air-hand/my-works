@@ -8,8 +8,5 @@
             "path": "../../../",
         },
     ],
-    "settings": {
-        "typescript.format.enable": true,
-        "typescript.preferences.importModuleSpecifier": "project-relative",
-    }
+    "settings": {}
 }
