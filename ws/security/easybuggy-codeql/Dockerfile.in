@@ -10,4 +10,4 @@ RUN mkdir -p /usr/local/src && cd /usr/local/src \
     && sudo ln -s /usr/local/codeql/codeql /usr/local/bin/codeql \
     ;
 
-RUN pip install -U virtualenv
+RUN pip install -U virtualenv sarif-tools
