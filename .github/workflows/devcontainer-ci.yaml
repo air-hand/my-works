@@ -1,5 +1,8 @@
 on:
   push:
+    paths:
+      - "ws/chrome-extensions/**"
+      - "ws/security/easybuggy-codeql/**"
 
 jobs:
   Build-And-Run:
@@ -7,10 +10,9 @@ jobs:
     strategy:
       #fail-fast: true
       matrix:
-        workdir: [
-          "ws/chrome-extensions",
-          "ws/security/easybuggy-codeql",
-        ]
+        workdir:
+          - "ws/chrome-extensions"
+          - "ws/security/easybuggy-codeql"
     defaults:
       run:
         working-directory: ${{ matrix.workdir }}
