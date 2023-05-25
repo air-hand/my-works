@@ -45,3 +45,5 @@ run: build
 .PHONY: devcontainer-test
 devcontainer-test:
 	devcontainer up --workspace-folder=./ --remove-existing-container
+
+include ./codeql.mk

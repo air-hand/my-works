@@ -9,3 +9,5 @@ RUN mkdir -p /usr/local/src && cd /usr/local/src \
     && sudo unzip codeql-linux64.zip -d /usr/local \
     && sudo ln -s /usr/local/codeql/codeql /usr/local/bin/codeql \
     ;
+
+RUN pip install -U virtualenv
