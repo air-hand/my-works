@@ -1,0 +1,29 @@
+{
+    "name": "Dev Env for ${localWorkspaceFolderBasename}",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work/ws/tools/${localWorkspaceFolderBasename}",
+    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../../base-tools/initialize-devcontainer.sh && make -B Dockerfile",
+    "postStartCommand": "make init",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "vadimcn.vscode-lldb",
+                "serayuzgur.crates",
+                "tamasfe.even-better-toml",
+
+                "editorconfig.editorconfig",
+                "eamodio.gitlens",
+                "github.copilot",
+            ],
+            "settings": {
+                "editor.suggest.preview": true,
+            }
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/rust:1": {}
+    },
+    "shutdownAction": "stopCompose"
+}
