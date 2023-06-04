@@ -1,1 +1,6 @@
 INCLUDE /base-tools/Dockerfile.base
+
+RUN sudo apt -y install \
+    libclang-dev \
+    nasm yasm \
+    ;
