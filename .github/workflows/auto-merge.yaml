@@ -1,0 +1,26 @@
+name: dependabot auto-merge on chrome-extensions
+on:
+  pull_request:
+    paths:
+      - "ws/chrome-extensions/open-slideshare-in-iframe/**"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Fetch dependabot-metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Auto-merge
+        if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.htlm_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
