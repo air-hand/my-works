@@ -1,0 +1,22 @@
+{
+    "name": "Dev Env for ${localWorkspaceFolderBasename}",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work/ws/${localWorkspaceFolderBasename}",
+    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh && make -B Dockerfile",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "editorconfig.editorconfig",
+                "eamodio.gitlens",
+                "github.copilot",
+            ],
+            "settings": {
+                "editor.suggest.preview": true,
+            }
+        }
+    },
+    "features": {
+    },
+    "shutdownAction": "stopCompose"
+}

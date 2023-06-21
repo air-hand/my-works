@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  dev:
+    build:
+      context: ../../
+      dockerfile: ./ws/misc/Dockerfile
+      args:
+        UID: $UID
+        GID: $GID
+        USERNAME: $USERNAME
+        HOMEDIR: $HOMEDIR
+        DOCKER_GID: $DOCKER_GID
+    command: sleep infinity
+    tty: true
+    volumes:
+      - type: bind
+        source: ../../
+        target: /work
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: ~/.config/gh
+        target: ${HOMEDIR}/.config/gh
+      # https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+      - type: volume
+        source: commandhistory
+        target: /commandhistory
+
+volumes:
+  commandhistory:
