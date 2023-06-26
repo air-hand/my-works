@@ -4,7 +4,7 @@
     ".ts$": "[name].[type]"
   },
   "devDependencies": {
-    "@parcel/config-webextension": "^2.8.3",
+    "@parcel/config-webextension": "^2.9.3",
     "@types/chrome": "^0.0.238",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.2",
