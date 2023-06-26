@@ -15,6 +15,6 @@
     "parcel": "^2.8.3",
     "parcel-namer-custom": "^0.2.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
