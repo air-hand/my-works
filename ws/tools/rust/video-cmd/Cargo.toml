@@ -7,5 +7,4 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
-# TODO: switch activiely maintained fork
-ffmpeg-sys = { version = "4", features = ["build"] }
+ffmpeg-next = { version = "6.0.0", features = ["build"] }

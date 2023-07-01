@@ -3,4 +3,7 @@ INCLUDE /base-tools/Dockerfile.base
 RUN sudo apt -y install \
     libclang-dev \
     nasm yasm \
+    # build binary for windows
+    mingw-w64 pkg-config \
     ;
+#pacman -S base-devel mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-libunistring mingw-w64-ucrt-x86_64-perl mingw-w64-ucrt-x86_64-SDL2 nasm yasm wget git unzip p7zip make cmake tar automake autoconf libtool pkg-config mercurial

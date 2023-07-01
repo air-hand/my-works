@@ -1,0 +1,29 @@
+{
+    "name": "TiDB",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work",
+    "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash .devcontainer/initialize.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+//                "hashicorp.terraform",
+                "editorconfig.editorconfig",
+                "eamodio.gitlens",
+                "bierner.markdown-mermaid",
+            ],
+            "settings": {
+                "editor.suggest.preview": true,
+                "aws.telemetry": false,
+//                "terraform.languageServer.terraform.path": "/usr/local/bin/terraform",
+//                "terraform.experimentalFeatures.prefillRequiredFields": true,
+//                "terraform.telemetryLevel": "off",
+            }
+        }
+    },
+    // https://hub.docker.com/_/microsoft-vscode-devcontainers
+//    "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+    "features": {
+    },
+    "shutdownAction": "stopCompose"
+}

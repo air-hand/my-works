@@ -4,8 +4,8 @@ use clap::Parser;
 
 #[derive(Parser)]
 pub struct Cli {
-    subcommand: String,
-    subargs: Vec<String>,
+    pub subcommand: String,
+    pub subargs: Vec<String>,
 }
 
 impl Cli {
@@ -14,6 +14,7 @@ impl Cli {
         Self::parse()
     }
 }
+
 
 impl fmt::Display for Cli {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
