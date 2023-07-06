@@ -31,7 +31,7 @@ up: build
 	docker compose up
 
 .PHONY: stop
-clean:
+stop:
 	docker compose stop
 
 .PHONY: down

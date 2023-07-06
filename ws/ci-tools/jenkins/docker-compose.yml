@@ -42,6 +42,8 @@ services:
     environment:
       CASC_JENKINS_CONFIG: /casc.yaml
       JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+      JENKINS_ADMIN_USERNAME: admin
+      JENKINS_ADMIN_PASSWORD: admin
     volumes:
       - type: volume
         source: jenkins_home
@@ -52,6 +54,28 @@ services:
     ports:
       - 8080:80
       - 50000:50000
+  keycloak:
+    image: jboss/keycloak:latest
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_ADDR: keycloak-mysql
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      DB_SCHEMA: keycloak
+      DB_VENDOR: mysql
+    ports:
+      - 18080:8080
+    depends_on:
+      - keycloak-mysql
+
+  keycloak-mysql:
+    image: mysql/mysql-server:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: keycloak
 
 volumes:
   commandhistory:

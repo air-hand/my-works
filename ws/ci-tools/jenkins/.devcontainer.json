@@ -12,6 +12,7 @@
                 "bierner.markdown-mermaid",
                 "github.copilot",
                 "tabeyti.jenkins-jack",
+                "DontShaveTheYak.jenkins-extension-pack",
             ],
             "settings": {
                 "editor.suggest.preview": true,
