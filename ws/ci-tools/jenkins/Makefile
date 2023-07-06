@@ -6,7 +6,7 @@ include $(ROOT_DIR)/base-tools/common.mk
 
 ifeq ($(IS_IN_CONTAINER),0)
 
-JENKINS_URL := http://jenkins:8080
+JENKINS_URL := http://jenkins
 
 .PHONY: download-jenkins-cli
 download-jenkins-cli:
