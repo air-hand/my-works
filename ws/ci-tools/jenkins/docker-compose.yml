@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  dev:
+    build:
+      context: $ROOT_DIR
+      dockerfile: ./ws/ci-tools/$COMPOSE_PROJECT_NAME/Dockerfile
+      args:
+        UID: $UID
+        GID: $GID
+        USERNAME: $USERNAME
+        HOMEDIR: $HOMEDIR
+        DOCKER_GID: $DOCKER_GID
+    command: sleep infinity
+    tty: true
+    volumes:
+      - type: bind
+        source: $ROOT_DIR
+        target: /work
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: ~/.config/gh
+        target: ${HOMEDIR}/.config/gh
+      # https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+      - type: volume
+        source: commandhistory
+        target: /commandhistory
+      - type: volume
+        source: jenkins_home
+        target: /var/jenkins_home
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    command:
+      - --httpPort=80
+      - --prefix=/
+      - --argumentsRealm.passwd.admin=admin
+      - --argumentsRealm.roles.admin=admin
+    environment:
+      CASC_JENKINS_CONFIG: /casc.yaml
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+    volumes:
+      - type: volume
+        source: jenkins_home
+        target: /var/jenkins_home
+      - type: bind
+        source: ./casc.yaml
+        target: /casc.yaml
+    ports:
+      - 8080:80
+      - 50000:50000
+
+volumes:
+  commandhistory:
+  jenkins_home:

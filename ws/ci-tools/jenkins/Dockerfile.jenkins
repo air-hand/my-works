@@ -1,0 +1,8 @@
+FROM jenkins/jenkins:lts-jdk11
+
+USER jenkins
+
+#RUN jenkins-plugin-cli --plugins "configuration-as-code saml"
+RUN jenkins-plugin-cli --plugins "configuration-as-code"
+
+USER root
