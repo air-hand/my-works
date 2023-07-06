@@ -11,6 +11,9 @@
             "path": "./ws/chrome-extensions"
         },
         {
+            "path": "./ws/ci-tools"
+        },
+        {
             "path": "./ws/misc"
         },
         {
