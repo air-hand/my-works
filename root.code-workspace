@@ -19,6 +19,9 @@
         {
             "path": "./ws/try-bake"
         },
+        {
+            "path": "./ws/tools"
+        },
     ],
     "settings": {
         "files.exclude": {
