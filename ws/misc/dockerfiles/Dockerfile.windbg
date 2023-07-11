@@ -1,0 +1,11 @@
+# windows container
+#FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows:20H2
+
+# Install WinDbg
+RUN powershell -Command \
+    $ErrorActionPreference = 'Stop'; \
+    $ProgressPreference = 'SilentlyContinue'; \
+    Invoke-WebRequest -Method Get -Uri https://aka.ms/windbgPreview -OutFile windbg.exe; \
+    Start-Process -FilePath .\windbg.exe -ArgumentList '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-' -Wait; \
+    Remove-Item -Force windbg.exe
