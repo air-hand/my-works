@@ -11,9 +11,8 @@ inputs:
     default: "Auto-approved."
     required: false
 
-
 runs:
-  use: "composite"
+  using: "composite"
   steps:
     - name: Auto-review
       run: |
