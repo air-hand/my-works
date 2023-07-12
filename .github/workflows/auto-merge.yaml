@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  dependabot:
+  auto-merge-by-dependabot:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
@@ -18,9 +18,13 @@ jobs:
         uses: dependabot/fetch-metadata@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Auto-merge
+
+      - name: Checkout for local action
+        uses: actions/checkout@v3
+
+      - name: Auto review and merge
         if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
-        run: gh pr merge --auto --merge "$PR_URL"
-        env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ./.github/actions/auto-review-merge
+        with:
+            pr_url: ${{ github.event.pull_request.html_url }}
+            github_token: ${{ secrets.GITHUB_TOKEN }}

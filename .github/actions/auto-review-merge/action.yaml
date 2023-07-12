@@ -1,0 +1,37 @@
+name: "Auto review and merge"
+
+inputs:
+  github_token:
+    required: true
+  pr_url:
+    description: "Pull request URL"
+    required: true
+  approve_message:
+    description: "Message to use when approving the PR"
+    default: "Auto-approved."
+    required: false
+
+
+runs:
+  use: "composite"
+  steps:
+    - name: Auto-review
+      run: |
+        gh pr checkout "$PR_URL"
+        if [ "$(gh pr status --json reviewDecision -q .currentBranch.reviewDecision)" != "APPROVED" ]; then
+          gh pr review --approve --body "$APPROVE_MESSAGE" "$PR_URL"
+        else
+          echo "PR already approved."
+        fi
+      shell: bash
+      env:
+        PR_URL: ${{ inputs.pr_url }}
+        APPROVE_MESSAGE: ${{ inputs.approve_message }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
+
+    - name: Auto-merge
+      run: gh pr merge --auto --merge --delete-branch "$PR_URL"
+      shell: bash
+      env:
+        PR_URL: ${{ inputs.pr_url }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
