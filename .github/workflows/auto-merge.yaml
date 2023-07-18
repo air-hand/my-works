@@ -22,9 +22,18 @@ jobs:
       - name: Checkout for local action
         uses: actions/checkout@v3
 
+      - name: Generate token
+        id: generate-token
+        if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+        uses: ./.github/actions/generate-token-by-app
+        with:
+          # register Dependabot secrets.
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: Auto review and merge
         if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
         uses: ./.github/actions/auto-review-merge
         with:
-            pr_url: ${{ github.event.pull_request.html_url }}
-            github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_url: ${{ github.event.pull_request.html_url }}
+          github_token: ${{ steps.generate-token.outputs.token }}

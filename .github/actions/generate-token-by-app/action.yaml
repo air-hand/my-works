@@ -1,0 +1,43 @@
+name: "Generate token by app"
+
+inputs:
+  app_id:
+    description: "App ID"
+    required: true
+  private_key:
+    description: "Private key"
+    required: true
+
+outputs:
+  token:
+    description: "Generated token by app"
+    value: ${{ steps.generate_token.outputs.token }}
+
+runs:
+  using: "composite"
+  steps:
+#    - uses: actions/setup-node@v3
+#      with:
+#        node-version: 16
+
+    - name: Generate by JS
+      id: generate_token
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const gen = require('./generate.js');
+          const token = await gen({fetch});
+          core.setSecret(token);
+          core.setOutput('token', token);
+      env:
+        APP_ID: ${{ inputs.app_id }}
+        PRIVATE_KEY: ${{ inputs.private_key }}
+
+#    - name: Generate
+#      id: generate_token
+#      run: |
+#        ./generate.sh
+#      shell: bash
+#      env:
+#        APP_ID: ${{ inputs.app_id }}
+#        PRIVATE_KEY: ${{ inputs.private_key }}
