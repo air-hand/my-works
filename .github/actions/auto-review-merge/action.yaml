@@ -29,7 +29,7 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github_token }}
 
     - name: Auto-merge
-      run: gh pr merge --auto --merge --delete-branch "$PR_URL"
+      run: gh pr merge --auto --merge "$PR_URL"
       shell: bash
       env:
         PR_URL: ${{ inputs.pr_url }}
