@@ -25,7 +25,8 @@ runs:
       uses: actions/github-script@v6
       with:
         script: |
-          const gen = require('./generate.js');
+          const { GITHUB_ACTION_PATH } = process.env;
+          const gen = require(`${GITHUB_ACTION_PATH}/generate.js`);
           const token = await gen({fetch});
           core.setSecret(token);
           core.setOutput('token', token);
