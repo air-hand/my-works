@@ -6,6 +6,8 @@ updates:
     directory: "/ws/chrome-extensions/open-slideshare-in-iframe"
     schedule:
       interval: "weekly"
+    labels:
+      - "npm deps"
 
   # update github-actions
   - package-ecosystem: "github-actions"
