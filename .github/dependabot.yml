@@ -6,6 +6,15 @@ updates:
     directory: "/ws/chrome-extensions/open-slideshare-in-iframe"
     schedule:
       interval: "weekly"
+    labels:
+      - "npm deps"
+    # https://docs.github.com/ja/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#groups
+    groups:
+      eslint:
+        patterns:
+          - "@typescript-eslint*"
+          - "eslint"
+
 
   # update github-actions
   - package-ecosystem: "github-actions"
