@@ -1,0 +1,25 @@
+{
+    "name": "Dev Env for ${localWorkspaceFolderBasename}",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work/ws/ci-tools/${localWorkspaceFolderBasename}",
+    "initializeCommand": "make init-devcontainer",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "editorconfig.editorconfig",
+                "eamodio.gitlens",
+                "bierner.markdown-mermaid",
+                "github.copilot",
+                "tabeyti.jenkins-jack",
+                "DontShaveTheYak.jenkins-extension-pack",
+            ],
+            "settings": {
+                "editor.suggest.preview": true,
+            }
+        }
+    },
+    "features": {
+    },
+    "shutdownAction": "stopCompose"
+}

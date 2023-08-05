@@ -1,0 +1,127 @@
+version: "3"
+
+services:
+  dev:
+    build:
+      context: $ROOT_DIR
+      dockerfile: ./ws/ci-tools/$COMPOSE_PROJECT_NAME/Dockerfile
+      args:
+        UID: $UID
+        GID: $GID
+        USERNAME: $USERNAME
+        HOMEDIR: $HOMEDIR
+        DOCKER_GID: $DOCKER_GID
+    command: sleep infinity
+    tty: true
+    volumes:
+      - type: bind
+        source: $ROOT_DIR
+        target: /work
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+      - type: bind
+        source: ~/.config/gh
+        target: ${HOMEDIR}/.config/gh
+      # https://code.visualstudio.com/remote/advancedcontainers/persist-bash-history
+      - type: volume
+        source: commandhistory
+        target: /commandhistory
+      - type: volume
+        source: jenkins_home
+        target: /var/jenkins_home
+  jenkins:
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    command:
+      - --httpPort=80
+      - --prefix=/
+      - --argumentsRealm.passwd.admin=admin
+      - --argumentsRealm.roles.admin=admin
+    environment:
+      CASC_JENKINS_CONFIG: /casc.yaml
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+      JENKINS_ADMIN_USER: admin
+      JENKINS_ADMIN_PASSWORD: admin
+    volumes:
+      - type: volume
+        source: jenkins_home
+        target: /var/jenkins_home
+      - type: bind
+        source: ./casc.yaml
+        target: /casc.yaml
+    ports:
+      - 8080:80
+      - 50000:50000
+    
+  keycloak:
+    image: jboss/keycloak:latest
+    command:
+      # image default. same as -Djboss.bind.address=0.0.0.0
+      - -b 0.0.0.0
+#      - -Djboss.socket.binding.port-offset=10000
+#      - -Djboss.http.port=18080
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+#      KEYCLOAK_HTTP_PORT: 18080
+      DB_ADDR: keycloak-mysql
+#      DB_ADDR: localhost
+#      DB_PORT: 13306
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+      DB_SCHEMA: keycloak
+      DB_VENDOR: mysql
+    ports:
+      - 18080:8080
+    depends_on:
+      - keycloak-mysql
+#    network_mode: "host"
+
+  keycloak-mysql:
+    image: mysql/mysql-server:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: keycloak
+    volumes:
+      - type: volume
+        source: mysql-volume
+        target: /var/lib/mysql
+    ports:
+      - 13306:3306
+
+#  saml-idp:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.idp
+#    command:
+#      - saml-idp
+#      - --acsUrl
+#      - http://localhost:8080/securityRealm/finishLogin
+#      - --audience
+#      - http://localhost:8080/securityRealm/metadata
+#      - --cert=idp-public-cert.pem
+#      - --key=idp-private-key.pem
+#    ports:
+#      - 7000:7000
+
+volumes:
+  commandhistory:
+  jenkins_home:
+  mysql-volume:
+
+#
+#            "Cmd": [
+#                "-b",
+#                "0.0.0.0"
+#            ],
+#            "Image": "jboss/keycloak:latest",
+#            "Volumes": null,
+#            "WorkingDir": "",
+#            "Entrypoint": [
+#                "/opt/jboss/tools/docker-entrypoint.sh"
+#            ],
+#
