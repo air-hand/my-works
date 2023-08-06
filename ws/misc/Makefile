@@ -1,6 +1,4 @@
-MAKEFILE_DIR := $(dir $(abspath $(firstword $(MAKEFILE_LIST))))
-
-include ../../base-tools/dockerfile.mk
+include ../../base-tools/common.mk
 
 .PHONY: centos7-mysql
 centos7-mysql:
