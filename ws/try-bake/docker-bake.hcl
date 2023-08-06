@@ -3,6 +3,7 @@ variable "GID" {}
 variable "USERNAME" {}
 variable "HOMEDIR" {}
 variable "PROJECT_NAME" {}
+variable "DOCKER_GID" {}
 
 group "default" {
     targets = ["dev"]
@@ -20,6 +21,7 @@ target "base" {
         GID = "${GID}"
         USERNAME = "${USERNAME}"
         HOMEDIR = "${HOMEDIR}"
+        DOCKER_GID = "${DOCKER_GID}"
     }
     inherits = ["common"]
 }
