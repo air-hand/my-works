@@ -28,6 +28,7 @@
             "**/.git": true,
             "**/.DS_Store": true,
             "**/Thumbs.db": true,
+            "ws/**": true,
         },
         "files.associations": {
             "*.hcl": "terraform"

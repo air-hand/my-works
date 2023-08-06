@@ -3,6 +3,10 @@ on:
     paths:
       - "ws/chrome-extensions/**"
       - "ws/security/easybuggy-codeql/**"
+  pull_request:
+    paths:
+      - "ws/chrome-extensions/**"
+      - "ws/security/easybuggy-codeql/**"
 
 jobs:
   Build-And-Run:

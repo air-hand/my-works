@@ -1,4 +1,6 @@
-MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+include ../../base-tools/common.mk
+
+.DEFAULT_GOAL := all
 
 all: build
 

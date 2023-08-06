@@ -1,6 +1,8 @@
-MAKEFILE_DIR := $(dir $(abspath $(firstword $(MAKEFILE_LIST))))
+include ../../../base-tools/common.mk
 
-include ../../../base-tools/dockerfile.mk
+.DEFAULT_GOAL := all
+
+all: init build run
 
 .PHONY: init
 init:

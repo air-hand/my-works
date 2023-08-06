@@ -4,9 +4,10 @@ RUN yum update -y && \
     yum install -y curl
 
 RUN yum install -y https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm && \
-#    yum install -y centos-release-scl-rh && \
+    yum install -y centos-release-scl-rh && \
 #    yum install -y mysql*8.0.32*
-    yum install -y mysql-connector-python3-8.0.33*
+#    yum install -y mysql-connector-python3-8.0.33*
+    yum install -y mysql*8.0.33*
 #    yum install -y rh-python38-runtime
 
 #RUN curl -fsSL https://dev.mysql.com/get/mysql80-community-release-el7-7.noarch.rpm | 
