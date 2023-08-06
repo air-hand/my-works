@@ -19,7 +19,7 @@ show-vars:
 	@echo "MAKEFILE_DIR: $(MAKEFILE_DIR)"
 
 Dockerfile: $(MAKEFILE_DIR)/Dockerfile.in $(COMMON_MK_DIR)/*
-	@cd $(MAKEFILE_DIR) && docker run --rm -it -v $(COMMON_MK_DIR):/base-tools -v $(MAKEFILE_DIR)/:/root:ro coryb/dfpp Dockerfile.in > Dockerfile
+	@cd $(MAKEFILE_DIR) && docker run --rm -v $(COMMON_MK_DIR):/base-tools -v $(MAKEFILE_DIR)/:/root:ro coryb/dfpp Dockerfile.in > Dockerfile
 
 .PHONY: init-devcontainer
 init-devcontainer:
