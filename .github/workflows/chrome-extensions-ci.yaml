@@ -4,7 +4,10 @@ on:
     paths:
       - "ws/chrome-extensions/open-slideshare-in-iframe/**"
       - ".github/workflows/chrome-extensions-ci.yaml"
-      - ".github/dependabot.yml"
+  pull_request:
+    paths:
+      - "ws/chrome-extensions/open-slideshare-in-iframe/**"
+      - ".github/workflows/chrome-extensions-ci.yaml"
 
 jobs:
   Run-Tests:
