@@ -1,6 +1,4 @@
-MAKEFILE_DIR := $(dir $(abspath $(firstword $(MAKEFILE_LIST))))
-
-include ../../base-tools/dockerfile.mk
+include ../../base-tools/common.mk
 
 .PHONY: open-slideshare-in-iframe
 open-slideshare-in-iframe:
