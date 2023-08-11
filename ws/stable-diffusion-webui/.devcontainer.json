@@ -12,6 +12,7 @@
                 "eamodio.gitlens",
                 "bierner.markdown-mermaid",
                 "github.copilot",
+                "github.copilot-chat",
             ],
             "settings": {
                 "editor.suggest.preview": true,
