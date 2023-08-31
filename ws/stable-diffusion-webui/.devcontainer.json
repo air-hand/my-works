@@ -4,7 +4,7 @@
     "service": "dev",
     "workspaceFolder": "/work/ws/${localWorkspaceFolderBasename}",
     "initializeCommand": "PROJECTNAME=${localWorkspaceFolderBasename} bash ../../base-tools/initialize-devcontainer.sh",
-//    "postStartCommand": "make run",
+    "postStartCommand": "make",
     "customizations": {
         "vscode": {
             "extensions": [
