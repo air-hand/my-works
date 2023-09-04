@@ -1,0 +1,102 @@
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+        - entries:
+          - group: "jenkins-admin"
+          name: "admin"
+          pattern: ".*"
+          permissions:
+          - "Overall/Administer"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: true
+  labelAtoms:
+  - name: "built-in"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  numExecutors: 2
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    saml:
+      binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+      displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+      emailAttributeName: "urn:oid:1.2.840.113549.1.9.1"
+      groupsAttributeName: "Role"
+      idpMetadataConfiguration:
+        period: 0
+        xml: |-
+          <md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="http://localhost:18080/auth/realms/master">
+          <script/>
+          <md:IDPSSODescriptor WantAuthnRequestsSigned="true" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+          <md:KeyDescriptor use="signing">
+          <ds:KeyInfo>
+          <ds:KeyName>TRY5aZ_wsASmDbI0TTrFMWz-cDKtCF0nCZ94DzhOGyc</ds:KeyName>
+          <ds:X509Data>
+          <ds:X509Certificate>MIICmzCCAYMCBgGKYIQLGTANBgkqhkiG9w0BAQsFADARMQ8wDQYDVQQDDAZtYXN0ZXIwHhcNMjMwOTA0MTQwNDQwWhcNMzMwOTA0MTQwNjIwWjARMQ8wDQYDVQQDDAZtYXN0ZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCJ5MLpfImvkXv4dPCJN65zXiP99YCWzHN1C4wHqKoJ9Bedaw0APTlUc8+jwPaYGIrdlZjd2hZKQSo3AyPkn2Z0E6RNRlFl9YYiNXpdCy/pvZS3CwgTEN27Zmp+bVEgaeBfy//KNZzOZBMf1KbwIki6gek0PYnVrgaHtTRJ4zAEayUM1Kx4P1wzGlS1A2i7gB+r6P6dWGVMPCvKmddsZeoZG+YTaRa1aTSlFtEym0s/owu82UNLpTuaTEBqrqrLYETWJGb31JzM42lyNFZ9IGyCxmz4jbu6q/oes3O9pv6FK1R0hIE7U1bpv0GqawF6MIx8WYS4SY2B6T0rvhZAaAS1AgMBAAEwDQYJKoZIhvcNAQELBQADggEBADzSYZhqxA5BDAp6aO4qlKvsLS8jnQDLfRr7aWvA3ojUGV0ofLSRBw6st7GmXjrIXidwRJZyIJyHnPjQxsnPP3QlHifEse7lQ2yDAc0Aw0ixSE3TrH1xhUGSu/Lwv60ZD2HtII4USG96y4JEWdmtaCovzXUhDdFkpx7BRqCunANS1WWfypxkBCUEr/T5fyBzECr8hA6of41jtankrT/apWyWvSmtp2Xn7EFWFD2iAQWXp7KvuogfrLtQ9FaGAK8T5Sl1eVqwIu5UEfv03xp/a/MM/6W9sz5KRvCLUOMBcWJrLlkjqZBlW7CZitmcBPgQUfRPAq3ctxG7vtFYDr94xYQ=</ds:X509Certificate>
+          </ds:X509Data>
+          </ds:KeyInfo>
+          </md:KeyDescriptor>
+          <md:ArtifactResolutionService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="http://localhost:18080/auth/realms/master/protocol/saml/resolve" index="0"/>
+          <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost:18080/auth/realms/master/protocol/saml"/>
+          <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://localhost:18080/auth/realms/master/protocol/saml"/>
+          <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="http://localhost:18080/auth/realms/master/protocol/saml"/>
+          <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+          <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+          <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+          <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+          <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost:18080/auth/realms/master/protocol/saml"/>
+          <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://localhost:18080/auth/realms/master/protocol/saml"/>
+          <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="http://localhost:18080/auth/realms/master/protocol/saml"/>
+          <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="http://localhost:18080/auth/realms/master/protocol/saml"/>
+          </md:IDPSSODescriptor>
+          </md:EntityDescriptor>
+      maximumAuthenticationLifetime: 30
+      usernameAttributeName: "urn:oid:2.5.4.42"
+      usernameCaseConversion: "none"
+  slaveAgentPort: 5000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  location:
+    adminAddress: "まだアドレスが設定されていません。 <nobody@nowhere>"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  pollSCM:
+    pollingThreadCount: 10
+tool:
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"

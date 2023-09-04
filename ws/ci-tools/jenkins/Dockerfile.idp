@@ -1,0 +1,14 @@
+#FROM node:latest
+#
+#EXPOSE 7000 7000
+#
+#RUN npm install -g saml-idp && \
+#    openssl req -x509 -new -newkey rsa:2048 -nodes -subj '/C=US/ST=California/L=San Francisco/O=JankyCo/CN=Test Identity Provider' -keyout idp-private-key.pem -out idp-public-cert.pem -days 7300
+
+FROM jboss/keycloak:latest
+
+USER root
+
+RUN microdnf update && microdnf install lsof procps sudo less vim
+
+USER jboss

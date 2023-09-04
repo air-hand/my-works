@@ -1,0 +1,20 @@
+{
+    "folders": [
+        {
+            "path": ".",
+        },
+        {
+            "name": "repo-root",
+            "path": "../../../",
+        },
+    ],
+    "settings": {
+        "jenkins-jack.jenkins.connections": [
+            {
+                "name": "jenkins-container",
+                "uri": "http://jenkins/",
+                "username": "admin",
+            }
+        ]
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "jenkins-jack.jenkins.connections": [
+        {
+            "name": "jenkins-container",
+            "uri": "http://jenkins/",
+            "username": "admin",
+        }
+    ]
+}
