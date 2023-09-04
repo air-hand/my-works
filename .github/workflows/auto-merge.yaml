@@ -20,7 +20,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout for local action
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Generate token
         id: generate-token
