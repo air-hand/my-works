@@ -1,13 +1,13 @@
-MAKEFILE_DIR := $(patsubst %/,%,$(dir $(abspath $(firstword $(MAKEFILE_LIST)))))
-IS_IN_CONTAINER := $(shell test -f /.dockerenv && echo 0 || echo 1)
-ROOT_DIR := $(shell while ! test -f .root; do cd ..; done && echo $$(pwd))
+include ../../../base-tools/common.mk
 
-include $(ROOT_DIR)/base-tools/common.mk
+.DEFAULT_GOAL := all
 
 ifeq ($(IS_IN_CONTAINER),0)
 
 JENKINS_URL := http://jenkins
 JENKINS_CMD ?= help
+
+all: jenkins-cli
 
 .PHONY: download-jenkins-cli
 download-jenkins-cli:
@@ -23,8 +23,10 @@ clean-jenkins:
 
 else
 
+all : up
+
 .PHONY: build
-build:
+build: Dockerfile
 	docker compose build
 
 .PHONY: up

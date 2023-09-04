@@ -30,6 +30,9 @@ services:
       - type: volume
         source: jenkins_home
         target: /var/jenkins_home
+    networks:
+      - idp-sp
+
   jenkins:
     build:
       context: .
@@ -53,30 +56,42 @@ services:
         target: /casc.yaml
     ports:
       - 8080:80
-      - 50000:50000
-    
+#      - 50000:5000
+      - 10000:5000
+    networks:
+      - idp-sp
+
   keycloak:
-    image: jboss/keycloak:latest
+#    image: jboss/keycloak:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.idp
     command:
       # image default. same as -Djboss.bind.address=0.0.0.0
       - -b 0.0.0.0
-#      - -Djboss.socket.binding.port-offset=10000
+      - -Djboss.socket.binding.port-offset=10000
 #      - -Djboss.http.port=18080
+      - -Djboss.http.port=8080
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_STATISTICS: all
 #      KEYCLOAK_HTTP_PORT: 18080
       DB_ADDR: keycloak-mysql
 #      DB_ADDR: localhost
-#      DB_PORT: 13306
+      DB_PORT: 3306
       DB_USER: keycloak
       DB_PASSWORD: keycloak
       DB_SCHEMA: keycloak
       DB_VENDOR: mysql
     ports:
-      - 18080:8080
+      - 18080:18080
+      - 19990:19990
     depends_on:
       - keycloak-mysql
+    networks:
+      - idp-sp
+      - keycloak-net
 #    network_mode: "host"
 
   keycloak-mysql:
@@ -90,8 +105,10 @@ services:
       - type: volume
         source: mysql-volume
         target: /var/lib/mysql
-    ports:
-      - 13306:3306
+    networks:
+      - keycloak-net
+#    ports:
+#      - 13306:3306
 
 #  saml-idp:
 #    build:
@@ -113,15 +130,6 @@ volumes:
   jenkins_home:
   mysql-volume:
 
-#
-#            "Cmd": [
-#                "-b",
-#                "0.0.0.0"
-#            ],
-#            "Image": "jboss/keycloak:latest",
-#            "Volumes": null,
-#            "WorkingDir": "",
-#            "Entrypoint": [
-#                "/opt/jboss/tools/docker-entrypoint.sh"
-#            ],
-#
+networks:
+  idp-sp:
+  keycloak-net:

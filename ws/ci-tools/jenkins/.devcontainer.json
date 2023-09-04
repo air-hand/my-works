@@ -3,7 +3,7 @@
     "dockerComposeFile": "./docker-compose.yml",
     "service": "dev",
     "workspaceFolder": "/work/ws/ci-tools/${localWorkspaceFolderBasename}",
-    "initializeCommand": "make init-devcontainer",
+    "initializeCommand": "make init-devcontainer && make -B Dockerfile",
     "customizations": {
         "vscode": {
             "extensions": [

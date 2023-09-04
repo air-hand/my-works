@@ -1,3 +1,3 @@
 INCLUDE /base-tools/Dockerfile.base
 
-RUN sudo apt install -y openjdk-11-jdk-headless
+RUN sudo apt install -y openjdk-11-jdk-headless default-mysql-client

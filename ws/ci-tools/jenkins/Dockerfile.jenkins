@@ -2,7 +2,7 @@ FROM jenkins/jenkins:lts-jdk11
 
 USER jenkins
 
-RUN jenkins-plugin-cli --plugins "configuration-as-code saml"
+RUN jenkins-plugin-cli --plugins "configuration-as-code saml role-strategy"
 
 COPY ./init.groovy.d/*.groovy $JENKINS_HOME/init.groovy.d/
 
