@@ -11,6 +11,7 @@
                 "eamodio.gitlens",
                 "bierner.markdown-mermaid",
                 "github.copilot",
+                "golang.go",
             ],
             "settings": {
                 "editor.suggest.preview": true,
