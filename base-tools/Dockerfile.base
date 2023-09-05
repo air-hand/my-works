@@ -71,3 +71,4 @@ ENV PROMPT_COMMAND='history -a' \
 RUN mkdir -p /commandhistory && chown -R $USERNAME:$USERNAME /commandhistory
 
 USER $USERNAME
+ENV HOME=$HOMEDIR
