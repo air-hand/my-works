@@ -3,8 +3,8 @@ version: "3"
 services:
   dev:
     build:
-      context: ../../
-      dockerfile: ./ws/gh-tests/Dockerfile
+      context: $ROOT_DIR
+      dockerfile: ./ws/$COMPOSE_PROJECT_NAME/Dockerfile
       args:
         UID: $UID
         GID: $GID
@@ -15,7 +15,7 @@ services:
     tty: true
     volumes:
       - type: bind
-        source: ../../
+        source: $ROOT_DIR
         target: /work
       - type: bind
         source: /var/run/docker.sock

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "ws/gh-tests/**"
+      - "ws/github/**"
       - ".github/workflows/automated-jenkinsfile-to-gha.yaml"
 
 jobs:
@@ -12,12 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ws/gh-tests
+        working-directory: ws/github
     steps:
       - uses: actions/checkout@v3
       - uses: snow-actions/setup-jenkins@v1.1.0
         with:
-          jenkins_home: tests/jenkins.yaml
+          jenkins_home: ./jenkins_home
+      - name: install gh actions importer
+        run: |
+          gh extension install github/gh-actions-importer
+      - name: dry-run
+        run: |
+          mkdir -p tmp/dry-run && gh actions-importer dry-run jenkins --source-url $JENKINS_URL/jobs/job-dsl-plugin --output-dir tmp/dry-run
+
+
 
 # todo
 # * jenkins setup
