@@ -1,4 +1,4 @@
-module github.com/air-hand/my-works/ws/app.bin
+module app
 
 go 1.21
 

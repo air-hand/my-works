@@ -13,6 +13,9 @@
                 "bierner.markdown-mermaid",
                 "github.copilot",
                 "golang.go",
+                "ms-python.python",
+                "GraphQL.vscode-graphql",
+                "graphql.vscode-graphql-syntax",
             ],
             "settings": {
                 "editor.suggest.preview": true,

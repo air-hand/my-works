@@ -12,16 +12,16 @@ all: build run
 
 .PHONY: prebuild
 prebuild:
-	cd ./src && go get
+	cd ./app && go get
 
 .PHONY: build
 build: prebuild
-	cd ./src && go build
+	cd ./app && go build
 
 .PHONY: run
 run:
-#	cd ./src && ./app.bin
-	cd ./src && GH_TOKEN=$$(gh auth token) go run main.go
+#	cd ./app && ./app.bin
+	cd ./app && GH_TOKEN=$$(gh auth token) go run main.go
 
 else
 all : up

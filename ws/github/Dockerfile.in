@@ -1,4 +1,4 @@
-FROM golang:1.21 AS go-bin
+FROM golang:1.21-bullseye AS go-bin
 
 INCLUDE /base-tools/Dockerfile.base
 
