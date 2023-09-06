@@ -1,0 +1,35 @@
+name: Automated Jenkinsfile to Github Actions
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "ws/github/**"
+      - ".github/workflows/automated-jenkinsfile-to-gha.yaml"
+
+jobs:
+  GHA-Importer:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ws/github
+    steps:
+      - uses: actions/checkout@v3
+      - uses: snow-actions/setup-jenkins@v1.1.0
+        with:
+          jenkins_home: ./jenkins_home
+      - name: install gh actions importer
+        run: |
+          gh extension install github/gh-actions-importer
+      - name: dry-run
+        run: |
+          mkdir -p tmp/dry-run && gh actions-importer dry-run jenkins --source-url $JENKINS_URL/jobs/job-dsl-plugin --output-dir tmp/dry-run
+
+
+
+# todo
+# * jenkins setup
+# * create jenkins pipeline with JCasC
+# * gh actions dry-run
+# https://docs.github.com/ja/enterprise-cloud@latest/actions/migrating-to-github-actions/automated-migrations/migrating-from-jenkins-with-github-actions-importer#github-actions-importer-cli-%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB     - 
+#https://github.com/snow-actions/setup-jenkins#jenkins-configuration-as-code-jcasc

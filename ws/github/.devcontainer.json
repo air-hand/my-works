@@ -1,0 +1,29 @@
+{
+    "name": "Dev Env for ${localWorkspaceFolderBasename}",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work/ws/${localWorkspaceFolderBasename}",
+    "initializeCommand": "make init-devcontainer && make -B Dockerfile",
+    "postStartCommand": "make post-start-devcontainer",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "editorconfig.editorconfig",
+                "eamodio.gitlens",
+                "bierner.markdown-mermaid",
+                "github.copilot",
+                "golang.go",
+                "ms-python.python",
+                "GraphQL.vscode-graphql",
+                "graphql.vscode-graphql-syntax",
+            ],
+            "settings": {
+                "editor.suggest.preview": true,
+                "aws.telemetry": false,
+            }
+        }
+    },
+    "features": {
+    },
+    "shutdownAction": "stopCompose"
+}
