@@ -14,7 +14,7 @@ jobs:
       run:
         working-directory: ws/github
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: snow-actions/setup-jenkins@v1.1.0
         with:
           jenkins_home: ./jenkins_home
