@@ -23,6 +23,10 @@ run:
 #	cd ./app && ./app.bin
 	cd ./app && GH_TOKEN=$$(gh auth token) go run main.go
 
+.PHONY: run-py
+run-py:
+	cd ./graphql && GH_TOKEN=$$(gh auth token) /usr/bin/python3 graphql.py
+
 else
 all : up
 
