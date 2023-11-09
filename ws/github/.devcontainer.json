@@ -17,6 +17,7 @@
                 "GraphQL.vscode-graphql",
                 "graphql.vscode-graphql-syntax",
                 "github.vscode-github-actions",
+                "HashiCorp.terraform",
             ],
             "settings": {
                 "editor.suggest.preview": true,
