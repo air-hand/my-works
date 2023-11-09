@@ -1,0 +1,30 @@
+# 
+on:
+  push:
+    paths:
+      - '.github/workflows/aws-test.yaml'
+
+env:
+  S3_BUCKET_NAME: buc-wx3razol0ggsc0a0ao61xhehe48umkck
+  ROLE_TO_ASSUME_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-role-for-my-works
+  AWS_REGION: ap-northeast-1
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  S3Upload:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ws/github
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.ROLE_TO_ASSUME_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-duration-seconds: 900
+      - name: Upload to S3
+        run: |
+          echo "Hello, world!" | aws s3 cp - s3://${{ env.S3_BUCKET_NAME }}/stream.txt
