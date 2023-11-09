@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/workflows/aws-test.yaml'
 
+# https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#adding-the-identity-provider-to-aws
 env:
   S3_BUCKET_NAME: buc-wx3razol0ggsc0a0ao61xhehe48umkck
   ROLE_TO_ASSUME_ARN: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-role-for-my-works
@@ -20,6 +21,7 @@ jobs:
       run:
         working-directory: ws/github
     steps:
+      - uses: actions/checkout@v4
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ env.ROLE_TO_ASSUME_ARN }}
