@@ -16,6 +16,7 @@
                 "ms-python.python",
                 "GraphQL.vscode-graphql",
                 "graphql.vscode-graphql-syntax",
+                "github.vscode-github-actions",
             ],
             "settings": {
                 "editor.suggest.preview": true,
