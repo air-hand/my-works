@@ -11,6 +11,10 @@ ifeq ($(words $(MAKEFILE_LIST)),1)
 $(error "Must include $(firstword $(MAKEFILE_LIST)) from another makefile.")
 endif
 
+.PHONY: random-string
+random-string:
+	@SHELL=/bin/bash cat /dev/urandom |LANG=C tr -dc '[:alnum:]' | head -c 100
+
 .PHONY: show-vars
 show-vars:
 	@echo "IS_IN_CONTAINER: $(IS_IN_CONTAINER)"
