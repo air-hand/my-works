@@ -14,7 +14,8 @@ ARG GID
 ARG HOMEDIR
 ARG DOCKER_GID
 
-RUN sed -ie 's!http://deb.debian.org/debian !http://ftp.jaist.ac.jp/debian !' /etc/apt/sources.list
+# https://www.debian.org/mirror/list-full.en.html#JP 
+RUN sed -ie 's!http://deb.debian.org/debian !http://ftp.kddilabs.jp/pub/debian !' /etc/apt/sources.list
 
 # https://docs.docker.com/engine/install/debian/#set-up-the-repository
 # Install docker-cli
