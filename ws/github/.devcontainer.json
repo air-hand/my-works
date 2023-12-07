@@ -4,7 +4,7 @@
     "service": "dev",
     "workspaceFolder": "/work/ws/${localWorkspaceFolderBasename}",
     "initializeCommand": "make init-devcontainer && make -B Dockerfile",
-    "postStartCommand": "make post-start-devcontainer",
+    "postStartCommand": "make post-start-devcontainer || true",
     "customizations": {
         "vscode": {
             "extensions": [

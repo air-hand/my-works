@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "buc-wx3razol0ggsc0a0ao61xhehe48umkck"
+    #bucket         = ""
     key            = "my-works/terraform/aws-self-hosted-runner.tfstate"
     region         = "ap-northeast-1"
     encrypt        = true
