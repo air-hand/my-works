@@ -25,3 +25,19 @@ Dockerfile: $(MAKEFILE_DIR)/Dockerfile.in $(COMMON_MK_DIR)/*
 init-devcontainer:
 	@cd $(MAKEFILE_DIR) && \
 	PROJECTNAME=$$(basename $(MAKEFILE_DIR)) bash $(COMMON_MK_DIR)/initialize-devcontainer.sh
+
+.PHONY: devcontainer-up
+devcontainer-up: DOTFILES_GITHUB_REPOSITORY ?=
+devcontainer-up: DOTFILES_REPOSITORY_URL ?=
+devcontainer-up: DOTFILES_REPOSITORY_URL := $(if $(DOTFILES_GITHUB_REPOSITORY:=),https://github.com/$(DOTFILES_GITHUB_REPOSITORY),$(DOTFILES_REPOSITORY_URL))
+devcontainer-up: DEVCONTAINER_ARGS ?= --workspace-folder=./
+devcontainer-up: DEVCONTAINER_ARGS := $(if $(DOTFILES_REPOSITORY_URL:=),$(DEVCONTAINER_ARGS) --dotfiles-repository=$(DOTFILES_REPOSITORY_URL),$(DEVCONTAINER_ARGS))
+devcontainer-up:
+	@if [ -z "$(DOTFILES_GITHUB_REPOSITORY)" ]; then \
+		echo "DOTFILES_GITHUB_REPOSITORY is not set. set it to the owner/repo of your dotfiles repository if you want to use."; \
+		echo "e.g."; \
+		echo "	make devcontainer-up DOTFILES_REPOSITORY_URL=https://path/to/your/dotfiles.git"; \
+		echo "	make devcontainer-up DOTFILES_GITHUB_REPOSITORY=owner/dotfiles_repo"; \
+	fi; \
+	cd $(MAKEFILE_DIR) && \
+	devcontainer up $(DEVCONTAINER_ARGS)
