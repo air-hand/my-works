@@ -30,7 +30,7 @@ init-devcontainer:
 devcontainer-up: DOTFILES_GITHUB_REPOSITORY ?=
 devcontainer-up: DOTFILES_REPOSITORY_URL ?=
 devcontainer-up: DOTFILES_REPOSITORY_URL := $(if $(DOTFILES_GITHUB_REPOSITORY:=),https://github.com/$(DOTFILES_GITHUB_REPOSITORY),$(DOTFILES_REPOSITORY_URL))
-devcontainer-up: DEVCONTAINER_ARGS ?= --workspace-folder=./
+devcontainer-up: DEVCONTAINER_ARGS ?= --workspace-folder=./ --remove-existing-container
 devcontainer-up: DEVCONTAINER_ARGS := $(if $(DOTFILES_REPOSITORY_URL:=),$(DEVCONTAINER_ARGS) --dotfiles-repository=$(DOTFILES_REPOSITORY_URL),$(DEVCONTAINER_ARGS))
 devcontainer-up:
 	@if [ -z "$(DOTFILES_GITHUB_REPOSITORY)" ]; then \
