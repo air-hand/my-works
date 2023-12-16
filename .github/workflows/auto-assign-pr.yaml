@@ -6,13 +6,24 @@ on:
       - opened
       - reopened
 
-permissions:
-  pull-requests: write
-
 jobs:
-  add_assignees:
-    if: ${{ github.actor != 'dependabot[bot]' }}
+  inspect_actor_is_bot:
     runs-on: ubuntu-latest
+    outputs:
+      is_bot: ${{ steps.actor_is_bot.outputs.is_bot }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/inspect-event-sender-bot-or-not
+        id: actor_is_bot
+        with:
+          github_event_payload: ${{ toJSON(github.event) }}
+
+  add_assignees:
+    needs: inspect_actor_is_bot
+    if: ${{ ! fromJSON(needs.inspect_actor_is_bot.outputs.is_bot) }}
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions-ecosystem/action-add-assignees@v1
         with:
