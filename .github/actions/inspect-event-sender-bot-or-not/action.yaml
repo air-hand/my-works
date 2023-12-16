@@ -16,7 +16,7 @@ runs:
     - name: inspect
       id: inspect
       run: |
-        IS_BOT=$(echo "${GITHUB_EVENT_PAYLOAD:-{}}" | jq -r '.sender.type == "Bot"')
+        IS_BOT=$(echo "${{ fromJSON(env.GITHUB_EVENT_PAYLOAD).sender }}" | jq -r '.type == "Bot"')
         echo "IS_BOT=$IS_BOT" >> $GITHUB_OUTPUT
       shell: bash
       env:
