@@ -1,0 +1,23 @@
+name: "Inspect event sender is bot or not"
+
+inputs:
+  github_event_payload:
+    description: "GitHub event payload"
+    required: true
+
+outputs:
+  is_bot:
+    description: "Is bot or not"
+    value: ${{ steps.inspect.outputs.IS_BOT }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: inspect
+      id: inspect
+      run: |
+        IS_BOT=$(echo "$GITHUB_EVENT_PAYLOAD" | jq -r '.sender.type == "Bot"')
+        echo "IS_BOT=$IS_BOT" >> $GITHUB_OUTPUT
+      shell: bash
+      env:
+        GITHUB_EVENT_PAYLOAD: ${{ inputs.github_event_payload }}
