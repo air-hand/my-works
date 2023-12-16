@@ -39,28 +39,26 @@ jobs:
           {
             language: 'javascript',
             config: '.github/codeql/codeql-config-js.yml',
-          }
+            autobuild: false,
+          },
         ]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
-      with:
-        config-file: ${{ matrix.configs.config }}
-        languages: ${{ matrix.configs.language }}
+      # Initializes the CodeQL tools for scanning.
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          config-file: ${{ matrix.configs.config }}
+          languages: ${{ matrix.configs.language }}
 
+      - name: Autobuild
+        if: ${{ matrix.configs.autobuild || false }}
+        uses: github/codeql-action/autobuild@v2
 
-
-        
-    - name: Autobuild
-      if: ${{ matrix.configs.autobuild || false }}
-      uses: github/codeql-action/autobuild@v2
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
-      with:
-        category: "/language:${{ matrix.configs.language }}"
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:${{ matrix.configs.language }}"
