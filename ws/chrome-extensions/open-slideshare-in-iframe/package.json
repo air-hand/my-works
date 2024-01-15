@@ -5,7 +5,7 @@
   },
   "devDependencies": {
     "@parcel/config-webextension": "^2.10.3",
-    "@types/chrome": "^0.0.254",
+    "@types/chrome": "^0.0.256",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.5",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
