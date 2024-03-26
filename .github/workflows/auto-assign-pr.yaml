@@ -12,8 +12,7 @@ jobs:
     outputs:
       is_bot: ${{ steps.actor_is_bot.outputs.is_bot }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/inspect-event-sender-bot-or-not
+      - uses: air-hand/common-actions/inspect_actor@main
         id: actor_is_bot
         with:
           github_event_payload: ${{ toJSON(github.event) }}
