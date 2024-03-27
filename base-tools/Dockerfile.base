@@ -1,4 +1,9 @@
 # syntax=docker/dockerfile:1
+
+FROM homebrew/brew:4.1.21 AS brew-image
+
+RUN /home/linuxbrew/.linuxbrew/bin/brew untap homebrew/core && /home/linuxbrew/.linuxbrew/bin/brew doctor
+
 FROM debian:bullseye
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -71,5 +76,15 @@ ENV PROMPT_COMMAND='history -a' \
     HISTFILE=/commandhistory/.bash_history
 RUN mkdir -p /commandhistory && chown -R $USERNAME:$USERNAME /commandhistory
 
+# aqua
+#RUN cd /tmp \
+#    && curl -sSfL -O https://raw.githubusercontent.com/aquaproj/aqua-installer/v2.2.0/aqua-installer \
+#    && echo "d1r118c3172d90ffa6be205344b93e8621de9bf47c852d80da188ffa6985c276  aqua-installer" | sha256sum -c \
+#    && chmod +x aqua-installer \
+#    && ./aqua-installer \
+#    ;
+
 USER $USERNAME
 ENV HOME=$HOMEDIR
+
+COPY --from=brew-image --chown=$USERNAME:$USERNAME /home/linuxbrew/.linuxbrew /home/linuxbrew/.linuxbrew
