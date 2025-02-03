@@ -7,7 +7,7 @@
     "@parcel/config-webextension": "^2.13.3",
     "@types/chrome": "^0.0.301",
     "@types/jest": "^29.5.14",
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.13.0",
     "@typescript-eslint/eslint-plugin": "^8.2.0",
     "@typescript-eslint/parser": "^8.2.0",
     "eslint": "^8.56.0",
